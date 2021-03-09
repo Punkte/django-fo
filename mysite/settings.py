@@ -31,7 +31,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'django-fo.heroku.com',
+    'django-fo.herokuapp.com',
     '0.0.0.0', 'localhost', '127.0.0.1',
 ]
 
