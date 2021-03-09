@@ -1,18 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Question
-from .models import Post
+from .models import Post, Contact
 from django.utils import timezone
 from django.shortcuts import render
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, ContactForm
+from django.shortcuts import redirect
+import json
 
 # Create your views here.
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'formation/index.html', context)
+    return render(request, 'formation/index.html')
 
 def blog(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -35,3 +34,20 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
+def contact_detail(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    return render(request, 'contact/contact_detail.html', {'contact': contact})
+
+def contact_new(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.published_date = timezone.now()
+            contact.status = 'UR'
+            contact.save()
+            return redirect('contact_detail', pk=contact.pk)
+    else:
+        form = ContactForm()
+    return render(request, 'contact/index.html', {'form': form})

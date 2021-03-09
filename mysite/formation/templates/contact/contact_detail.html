@@ -11,13 +11,14 @@
 
         {% block content %}
         <div class="post">
-            {% if post.published_date %}
+            {% if contact.created_date %}
             <div class="date">
-                {{ post.published_date }}
+                {{ contact.created_date }}
             </div>
             {% endif %}
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.text }}</p>
+            <h2>{{ contact.contact_object }}</h2>
+            <p>{{ contact.content }}</p>
+            <p>{{ contact.status }}</p>
         </div>
         {% endblock %}
 

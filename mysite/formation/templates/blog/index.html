@@ -1,51 +1,11 @@
-
-{% load static %}
-
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ghost Style Blog - Free Bulma template</title>
-  <script src="https://kit.fontawesome.com/15181efa86.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-  <link rel="stylesheet" href="{% static 'blog/style.css' %}" alt="My image">
-</head>
+{% include 'blog/common/head.html' %}
 
 <body>
 
   <section class="hero is-medium">
     <div class="hero-head">
       <div class="container">
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-
-          <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-              <a class="navbar-item is-active">
-                Home
-              </a>
-              <a class="navbar-item">
-                Blog Posts
-              </a>
-            </div>
-
-            <div class="navbar-end">
-              <div class="navbar-item">
-                <a href="#">
-                  <i class="fab fa-facebook"></i>
-                </a>
-                <a href="#">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#">
-                  <i class="fas fa-rss-square"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </nav>
+        {% include 'blog/common/header.html' %}
       </div>
     </div>
     <div class="hero-body">
@@ -54,7 +14,7 @@
         <h2 class="subtitle">
           NOTRE SUPER BLOG
         </h2>
-        <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">NEW POST</span></a>
+        <a href="{% url 'contact_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">Contact</span></a>
 
       </div>
     </div>
@@ -67,7 +27,7 @@
 
           <div class="columns is-multiline">
 
-            {% include 'blog/article.html' %} 
+            {% include 'blog/components/article.html' %}
 
 
           </div>

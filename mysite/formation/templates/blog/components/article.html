@@ -1,9 +1,10 @@
+{% load static %}
 
 {% for post in posts %}
 <div class="column post is-6">
   <article class="columns is-multiline">
     <div class="column is-12 post-img">
-      <img src="https://cdn.emk.dev/templates/post-img.png" alt="Featured Image">
+      <img src="{{ post.img }}" alt="Featured Image">
     </div>
     <div class="column is-12 featured-content ">
       <h3 class="heading post-category">{{ post.published_date }}</h3>
@@ -16,4 +17,4 @@
     </div>
   </article>
 </div>
-{% endfor %}
+{% endfor %}    

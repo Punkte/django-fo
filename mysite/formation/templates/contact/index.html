@@ -1,0 +1,23 @@
+{% include 'blog/common/head.html' %}
+
+<body>
+
+    <section class="hero is-medium">
+        <div class="hero-head">
+            <div class="container">
+                {% include 'blog/common/header.html' %}
+            </div>
+        </div>
+
+        <div class="hero-body">
+          <div class="container">
+    
+            <h2>Formulaire</h2>
+            <form method="POST" class="post-form">{% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+          </div>
+        </div>
+
+      </body>

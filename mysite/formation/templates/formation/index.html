@@ -1,11 +1,4 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'formation/style.css' %}" alt="My image">
-{% if latest_question_list %}
-<ul>
-    {% for question in latest_question_list %}
-    <li><a href="/formation/{{ question.id }}/">{{ question.question_text }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No polls are available.</p>
-{% endif %}
+
+<p>Salut tout le monde entrez donc sur la page du pole R&D <a href="/formation/blog">ici</a></p>
