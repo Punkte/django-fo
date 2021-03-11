@@ -78,7 +78,7 @@ def contact_cv(request):
             contact = form.save(commit=False)
             contact.published_date = timezone.now()
             contact.status = 'UR'
-            contact.skills = Skill.objects.filter(pk__in=contact.skills)
+            # contact.skills = Skill.objects.filter(pk__in=contact.skills)
             contact.save()
             return redirect('cv_detail', pk=contact.pk)
     else:
