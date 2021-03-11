@@ -28,15 +28,6 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 
-def mailer(request):
-    send_mail(
-    'Salut, la pêche ?',
-    'Yep bien vu, t\'es inscrit !',
-    'cecours@dedjangoestouf.com',
-    ['to@yourbestuser.com'],
-    fail_silently=False,
-)
-
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)

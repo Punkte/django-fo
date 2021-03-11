@@ -18,10 +18,11 @@ class CvForm(forms.ModelForm):
 
     class Meta:
         model = CV
-        fields = ['name', 'first_name', 'description', 'skills']
+        fields = ['name', 'first_name', 'description', 'experiences', 'skills']
     name = forms.CharField()
     first_name = forms.CharField()
-    description = forms.CharField()
+    description = forms.CharField(widget=forms.Textarea)
+    experiences = forms.CharField(widget=forms.Textarea)
     skills = forms.ModelMultipleChoiceField(
         queryset=Skill.objects.all(),
         widget=forms.CheckboxSelectMultiple

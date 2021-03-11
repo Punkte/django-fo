@@ -11,6 +11,9 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     environment:
       SECRET_KEY: 'a^cydtb3*9g3e+%ow=-cy+6c458@wu@g5t2^390y%ef&8u-@pr'
+      DJANGO_SUPERUSER_PASSWORD: root
+      DJANGO_SUPERUSER_USERNAME: root
+      DJANGO_SUPERUSER_EMAIL: root@localhost.dev
     volumes:
       - .:/code
     ports:

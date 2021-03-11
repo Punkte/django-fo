@@ -8,7 +8,7 @@ class TermInlineAdmin(admin.TabularInline):
 class CVAdmin(admin.ModelAdmin):
   fieldsets = (
       (None, {
-          'fields': ('name', 'description', 'experiences')
+          'fields': ('name', 'first_name', 'description', 'experiences')
       }),
   )
   inlines = (TermInlineAdmin,)
