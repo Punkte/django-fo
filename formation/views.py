@@ -1,17 +1,23 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Post, Contact
+from django.core.mail import send_mail
+from .models import Post, Contact, CV, Skill
 from django.utils import timezone
 from django.shortcuts import render
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm, ContactForm
+from .forms import PostForm, ContactForm, CvForm
 from django.shortcuts import redirect
 import json
 
 # Create your views here.
 def index(request):
-    return render(request, 'formation/index.html')
+    # cvs = CV.objects.filter(created_date=timezone.now()).order_by('created_date')
+    cvs = CV.objects.all()
+    def apply(cv):
+        cv['skills'] = cv.skills.all()
+    map(apply, cvs)
+    return render(request, 'formation/index.html', {'cvs': cvs})
 
 def blog(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -21,6 +27,15 @@ def blog(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
+def mailer(request):
+    send_mail(
+    'Salut, la pêche ?',
+    'Yep bien vu, t\'es inscrit !',
+    'cecours@dedjangoestouf.com',
+    ['to@yourbestuser.com'],
+    fail_silently=False,
+)
 
 def post_new(request):
     if request.method == "POST":
@@ -39,6 +54,10 @@ def contact_detail(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
     return render(request, 'contact/contact_detail.html', {'contact': contact})
 
+def cv_detail(request, pk):
+    cvs = get_object_or_404(CV, pk=pk)
+    return render(request, 'formation/cv_detail.html', {'cvs': cvs})
+
 def contact_new(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
@@ -51,3 +70,17 @@ def contact_new(request):
     else:
         form = ContactForm()
     return render(request, 'contact/index.html', {'form': form})
+
+def contact_cv(request):
+    if request.method == "POST":
+        form = CvForm(request.POST)
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.published_date = timezone.now()
+            contact.status = 'UR'
+            contact.skills = Skill.objects.filter(pk__in=contact.skills)
+            contact.save()
+            return redirect('cv_detail', pk=contact.pk)
+    else:
+        form = CvForm()
+    return render(request, 'formation/form.html', {'form': form})

@@ -1,0 +1,26 @@
+{% include 'blog/common/head.html' %}
+
+<body>
+
+  <section style="background-color: #c0c0c0;">
+
+    {% block content %}
+    <div>
+      <p> {{ cvs.created_date }}</p>
+      <p>{{cvs.name}}</p>
+      <p>{{cvs.first_name}}</p>
+      <p>{{cvs.description}}</p>
+      <ol>
+        {% for skill in cvs.skills.all %}
+        <li> {{ skill }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+    {% endblock %}
+
+
+    <h1 class="text-center"><a href="/formation/">BACK TO HOME</a></h1>
+  </section>
+</body>
+
+</html>

@@ -1,4 +1,44 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'formation/style.css' %}" alt="My image">
+{% include 'blog/common/head.html' %}
 
-<p>Salut tout le monde entrez donc sur la page du pole R&D <a href="/formation/blog">ici</a></p>
+<body>
+  <section style="background-color: #c0c0c0;">
+    <div class="row">
+      <h1 class="text-center"><a href="/formation/recrutement">Postuler</a></h1>
+
+
+      <div class="row flex-direction-column justify-content-center">
+        {% for cv in cvs %}
+        <article class="col-5 mt-5">
+          <span><span>Posutler le: </span>{{ cv.created_date }}</span>
+          <h2 class="text-uppercase">
+            {{cv.name}}
+          </h2>
+          <p style="color: green;">{{ cv.first_name }}</p>
+          <span class="text-decoration-underline">Expériences: </span>
+          {% if cv.experiences %}
+          <p>{{ cv.experiences }}</p>
+          {% else %}
+          <p style="color: red;">PAS D'XP</p>
+          {% endif %}
+
+          <span class="text-decoration-underline">Description: </span>
+          <p>{{ cv.description }}</p><br>
+          <span class="text-decoration-underline">Skills: </span>
+          {% if cv.skills.all %}
+          <ol>
+            {% for skill in cv.skills.all %}
+            <li> {{ skill }}</li>
+            {% endfor %}
+          </ol>
+          {% else %}
+          <p style="color: red;">PAS DE SKILL</p>
+          {% endif %}
+        </article>
+        <br>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

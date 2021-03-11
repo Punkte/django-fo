@@ -1,0 +1,16 @@
+{% include 'blog/common/head.html' %}
+
+<body>
+
+  <section style="background-color: #c0c0c0;">
+    <div>
+      <h2>Renseigner son CV</h2>
+      <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Enregistrer</button>
+      </form>
+    </div>
+  </section>
+</body>
+
+</html>
